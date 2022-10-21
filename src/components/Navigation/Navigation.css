@@ -1,0 +1,8 @@
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+  margin: 25px;
+  text-decoration: underline;
+  cursor: pointer;
+}
