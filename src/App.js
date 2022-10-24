@@ -34,7 +34,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     console.log('click')
-    const IMAGE_URL = this.setState({imgUrl: this.state.input})
+    this.setState({imgUrl: this.state.input})
 
     const raw = JSON.stringify({
       "user_app_id": {
@@ -45,7 +45,7 @@ class App extends Component {
           {
               "data": {
                   "image": {
-                      "url": IMAGE_URL
+                      "url": this.state.input
                   }
               }
           }
@@ -63,7 +63,7 @@ class App extends Component {
 
     fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => console.log(result.outputs[0].data.regions[0].region_info.bounding_box))
     .catch(error => console.log('error', error));
     }
 
