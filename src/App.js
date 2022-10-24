@@ -16,7 +16,6 @@ const APP_ID = 'FaceDetection2022';
 // Change these to whatever model and image URL you want to use
 const MODEL_ID = 'face-detection';
 const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';    
-// const IMAGE_URL = 'https://www.facebeautyscience.com/wp-content/uploads/2020/04/face-beauty-skin-face2-proc.jpg';
 
 
 class App extends Component {
@@ -33,7 +32,6 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
-    console.log('click')
     this.setState({imgUrl: this.state.input})
 
     const raw = JSON.stringify({

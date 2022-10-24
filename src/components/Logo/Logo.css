@@ -1,7 +1,5 @@
 .Tilt {
-  background: #FC5C7D;
-  background: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D); 
-  background: linear-gradient(to right, #6A82FB, #FC5C7D);
+  background: linear-gradient(to right, #24c6dc, #514a9d);
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   margin: 10px 40px;
   border-radius: 100px;
