@@ -4,6 +4,8 @@ import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import ImageRecognition from './components/ImageRecognition/ImageRecognition';
+import Signin from './components/Signin/Signin';
+import Register from './components/Register/Register';
 import ParticlesBg from 'particles-bg'
 
 import './App.css';
@@ -25,6 +27,8 @@ class App extends Component {
       input: '',
       imgUrl: '',
       box: {},
+      route: 'signin',
+      isSignin: false,
     }
   }
 
@@ -67,7 +71,7 @@ class App extends Component {
               }
           }
       ]
-    });
+    })
 
     const requestOptions = {
         method: 'POST',
@@ -84,22 +88,39 @@ class App extends Component {
     .catch(error => console.log('error', error));
     }
 
-  render() {
-    return (
-      <div className="App">
-        <ParticlesBg color="e0b1cb" type="cobweb" bg={true} />
-        <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm 
-        onButtonSubmit={this.onButtonSubmit}
-        onInputChange ={this.onInputChange}
-        />
-        <ImageRecognition imgUrl={this.state.imgUrl} box={this.state.box}/>
-      </div>
-    );
-  }
+    onRouteChange = (route) => {
+      if(route === 'signout') {
+        this.setState({isSignin: false})
+      } else if(route === 'home'){
+        this.setState({isSignin: true})
+      }
+      this.setState({route: route})
+    }
+ 
 
+    render() {
+      return (
+        <div className="App">
+          <ParticlesBg color="e0b1cb" type="cobweb" bg={true} />
+          <Navigation isSignin={this.state.isSignin} onRouteChange={this.onRouteChange} />
+          {this.state.route === 'home'
+            ? <div>
+                <Logo />
+                <Rank />
+                <ImageLinkForm 
+                onButtonSubmit={this.onButtonSubmit}
+                onInputChange ={this.onInputChange}
+                />
+                <ImageRecognition imgUrl={this.state.imgUrl} box={this.state.box}/>
+              </div>
+            : (this.state.route === 'signin'
+                ? <Signin onRouteChange={this.onRouteChange} />
+                : <Register onRouteChange={this.onRouteChange} />
+             )
+          }
+        </div>
+      );
+    }
 }
 
 export default App;
