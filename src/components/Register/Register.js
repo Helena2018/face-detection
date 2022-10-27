@@ -32,8 +32,16 @@ class Register extends React.Component{
         email: registerEmailChange,
         password: registerPasswordChange,
       })
-    })  
-    this.props.onRouteChange('home');
+    })
+      .then(res => res.json())
+      .then(user => {
+        if(user !== 'fail') {
+          this.props.onRouteChange('home');
+        } else {
+          console.log('email already exist')
+        }
+      })
+
   }
 
   render() {

@@ -29,6 +29,13 @@ class App extends Component {
       box: {},
       route: 'signin',
       isSignin: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: '',
+        joined: '',
+      }
     }
   }
   // Testing Server
