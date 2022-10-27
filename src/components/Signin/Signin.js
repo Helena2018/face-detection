@@ -3,8 +3,8 @@ import React from "react";
 
 
 class Signin extends React.Component{
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       signinEmailChange: '',
       signinPasswordChange: '',
@@ -19,13 +19,14 @@ class Signin extends React.Component{
     this.setState({signinPasswordChange: event.target.value})
   }
 
-  onSubmiteChange = () => {
+  onSubmiteSignin = () => {
+    const { signinEmailChange, signinPasswordChange } = this.state;
     fetch('http://localhost:3000/signin', {
       method: 'post',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
-        email: this.state.signinEmailChange,
-        password: this.state.signinPasswordChange,
+        email: signinEmailChange,
+        password: signinPasswordChange,
       })
     })
       .then(res => res.json())
@@ -57,14 +58,14 @@ class Signin extends React.Component{
                   <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                   <input 
                     onChange={this.onPasswordChange}
-                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" 
+                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" 
                     name="password"  
                     id="password" />
                 </div>
               </fieldset>
               <div className="">
                 <input 
-                  onClick={this.onSubmiteChange} 
+                  onClick={() => this.onSubmiteSignin()} 
                   className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" 
                   value="Sign in" />
               </div>
