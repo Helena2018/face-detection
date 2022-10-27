@@ -31,6 +31,12 @@ class App extends Component {
       isSignin: false,
     }
   }
+  // Testing Server
+  // componentDidMount() {
+  //   fetch('http://localhost:3000/')
+  //   .then(res => res.json())
+  //   .then(data => console.log(data))
+  // }
 
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
@@ -47,7 +53,6 @@ class App extends Component {
 
   displayFaceBox = (box) => {
     this.setState({box})
-    console.log(box)
   }
 
   onInputChange = (event) => {
