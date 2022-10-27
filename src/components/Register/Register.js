@@ -36,6 +36,7 @@ class Register extends React.Component{
       .then(res => res.json())
       .then(user => {
         if(user !== 'fail') {
+          this.props.loadUser(user);
           this.props.onRouteChange('home');
         } else {
           console.log('email already exist')

@@ -108,6 +108,16 @@ class App extends Component {
       }
       this.setState({route: route})
     }
+
+    loadUser = (data) => {
+      this.setState({user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      }})
+    }
  
 
     render() {
@@ -119,7 +129,7 @@ class App extends Component {
           {route === 'home'
             ? <div>
                 <Logo />
-                <Rank />
+                <Rank name={this.state.user.name} entrices={this.state.user.entries}/>
                 <ImageLinkForm 
                 onButtonSubmit={this.onButtonSubmit}
                 onInputChange ={this.onInputChange}
@@ -128,7 +138,10 @@ class App extends Component {
               </div>
             : (route === 'signin'
                 ? <Signin onRouteChange={this.onRouteChange} />
-                : <Register onRouteChange={this.onRouteChange} />
+                : <Register
+                  loadUser={this.loadUser} 
+                  onRouteChange={this.onRouteChange} 
+                />
              )
           }
         </div>
