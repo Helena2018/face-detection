@@ -35,14 +35,13 @@ class Register extends React.Component{
     })
       .then(res => res.json())
       .then(user => {
-        if(user !== 'fail') {
-          this.props.loadUser(user);
+        console.log(user)
+        if(user[0].email) {
+          this.props.loadUser(user[0]);
           this.props.onRouteChange('home');
-        } else {
-          console.log('email already exist')
         }
       })
-
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -79,7 +78,7 @@ class Register extends React.Component{
                 </div>
               </fieldset>
               <div className="">
-                <input onClick={() => this.onSubmiteRegister()} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
+                <input onClick={this.onSubmiteRegister} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Register" />
               </div>
             </div>
           </main>
