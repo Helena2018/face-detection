@@ -19,24 +19,25 @@ const APP_ID = 'FaceDetection2022';
 const MODEL_ID = 'face-detection';
 const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';    
 
+const initialState = {
+  input: '',
+  imgUrl: '',
+  box: {},
+  route: 'signin',
+  isSignin: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: '',
+  }
+}
 
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imgUrl: '',
-      box: {},
-      route: 'signin',
-      isSignin: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: 0,
-        joined: '',
-      }
-    }
+    this.state = initialState;
   }
   // Testing Server
   // componentDidMount() {
@@ -108,6 +109,7 @@ class App extends Component {
           .then(res => res.json())
           .then(count => {
             this.setState(Object.assign(this.state.user, {entries: count.entries}))
+            console.log(count.entries)
           })
       }
       this.displayFaceBox(this.calculateFaceLocation(result))})
@@ -116,7 +118,7 @@ class App extends Component {
 
     onRouteChange = (route) => {
       if(route === 'signout') {
-        this.setState({isSignin: false})
+        this.setState(initialState)
       } else if(route === 'home'){
         this.setState({isSignin: true})
       }
@@ -132,7 +134,6 @@ class App extends Component {
         joined: data.joined
       }})
     }
- 
 
     render() {
       const { isSignin, imgUrl, route, box } = this.state;
