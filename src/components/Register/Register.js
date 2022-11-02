@@ -24,7 +24,7 @@ class Register extends React.Component{
 
   onSubmiteRegister = () => {
     const { registerNameChange, registerEmailChange, registerPasswordChange } = this.state;
-    fetch('http://localhost:3000/register/', {
+    fetch('https://secret-river-58686.herokuapp.com/register', {
       method: 'post',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
@@ -35,7 +35,6 @@ class Register extends React.Component{
     })
       .then(res => res.json())
       .then(user => {
-        console.log(user)
         if(user[0].email) {
           this.props.loadUser(user[0]);
           this.props.onRouteChange('home');

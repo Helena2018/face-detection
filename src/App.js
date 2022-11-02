@@ -8,16 +8,7 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import ParticlesBg from 'particles-bg'
 
-import './App.css';
-
-
-const USER_ID = 'ta8wbh0f80d0';
-// Your PAT (Personal Access Token) can be found in the portal under Authentification
-const PAT = '3f79d6f9fe584471b4dd361ec6012901';
-const APP_ID = 'FaceDetection2022';
-// Change these to whatever model and image URL you want to use
-const MODEL_ID = 'face-detection';
-const MODEL_VERSION_ID = '6dc7e46bc9124c5c8824be4822abe105';    
+import './App.css';  
 
 const initialState = {
   input: '',
@@ -52,8 +43,8 @@ class App extends Component {
     const height = Number(image.height);
     const width = Number(image.width);
     return{
-      topRow: clarifaiFace.top_row * height,
-      bottomRow: height - (clarifaiFace.bottom_row * height),
+      topRow: clarifaiFace.top_row * height + 35,
+      bottomRow: height - (clarifaiFace.bottom_row * height) + 5,
       leftCol: clarifaiFace.left_col * width,
       rightCol: width - (clarifaiFace.right_col * width)
     }
@@ -69,37 +60,17 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imgUrl: this.state.input})
-    
-    const raw = JSON.stringify({
-      "user_app_id": {
-          "user_id": USER_ID,
-          "app_id": APP_ID
-      },
-      "inputs": [
-          {
-              "data": {
-                  "image": {
-                      "url": this.state.input
-                  }
-              }
-          }
-      ]
-    })
-
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Authorization': 'Key ' + PAT
-        },
-        body: raw
-    };
-
-    fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/versions/" + MODEL_VERSION_ID + "/outputs", requestOptions)
+    fetch('https://secret-river-58686.herokuapp.com/imageUrl', {
+          method: 'post',
+          headers: {'content-type': 'application/json'},
+          body: JSON.stringify({
+            input: this.state.input
+          })
+        })
     .then(response => response.json())
     .then(result => {
       if(result) {
-        fetch('http://localhost:3000/image/', {
+        fetch('https://secret-river-58686.herokuapp.com/image', {
           method: 'put',
           headers: {'content-type': 'application/json'},
           body: JSON.stringify({
@@ -109,7 +80,6 @@ class App extends Component {
           .then(res => res.json())
           .then(count => {
             this.setState(Object.assign(this.state.user, {entries: count.entries}))
-            console.log(count.entries)
           })
       }
       this.displayFaceBox(this.calculateFaceLocation(result))})
