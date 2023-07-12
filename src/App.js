@@ -60,7 +60,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imgUrl: this.state.input})
-    fetch('https://face-detection-api-kaje.onrender.com/imageUrl', {
+    fetch('https://face-detection-api-kaje.onrender.com/imageurl', {
           method: 'post',
           headers: {'content-type': 'application/json'},
           body: JSON.stringify({
