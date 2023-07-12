@@ -60,7 +60,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imgUrl: this.state.input})
-    fetch('https://smart-brain-api-9iki.onrender.com/imageUrl', {
+    fetch('https://face-detection-api-kaje.onrender.com/imageUrl', {
           method: 'post',
           headers: {'content-type': 'application/json'},
           body: JSON.stringify({
@@ -70,7 +70,7 @@ class App extends Component {
     .then(response => response.json())
     .then(result => {
       if(result) {
-        fetch('https://smart-brain-api-9iki.onrender.com/image', {
+        fetch('https://face-detection-api-kaje.onrender.com/image', {
           method: 'put',
           headers: {'content-type': 'application/json'},
           body: JSON.stringify({

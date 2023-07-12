@@ -24,7 +24,7 @@ class Register extends React.Component{
 
   onSubmiteRegister = () => {
     const { registerNameChange, registerEmailChange, registerPasswordChange } = this.state;
-    fetch('https://smart-brain-api-9iki.onrender.com/register', {
+    fetch('https://face-detection-api-kaje.onrender.com/register', {
       method: 'post',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify({
