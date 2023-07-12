@@ -30,7 +30,7 @@ class App extends Component {
     super();
     this.state = initialState;
   }
-  // Testing Server
+  //Testing Server
   // componentDidMount() {
   //   fetch('http://localhost:3000/')
   //   .then(res => res.json())
